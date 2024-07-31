@@ -9,7 +9,7 @@ public class OutputView {
     private static final String WINNER_MESSAGE = "최종 우승자 : ";
     private static final String MOVE_UNIT = "-";
 
-    public static void printResulttMessage() {
+    public static void printResultMessage() {
         System.out.println(RESULT_MESSAGE);
     }
 
