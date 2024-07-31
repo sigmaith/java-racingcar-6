@@ -5,16 +5,15 @@ import racingcar.model.Random;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RaceController {
     private List<Car> cars;
-    private int carCount;
     private int attemptCount;
 
     public void operate() {
         InputView inputView = new InputView();
-        setCarCount(inputView.getCarNames().length);
         setAttemptCount(inputView.getAttemptCount());
 
         createCars(inputView.getCarNames());
@@ -25,13 +24,9 @@ public class RaceController {
             OutputView.printCars(cars);
             System.out.println();
         }
-//        List<Car> winners = Car.findWinners(cars);
-//        OutputView.printEndMessage(winners);
 
-    }
-
-    private void setCarCount(int carCount) {
-        this.carCount = carCount;
+        List<Car> winners = findWinners(cars);
+        OutputView.printEndMessage(winners);
     }
 
     private void setAttemptCount(int attemptCount) {
@@ -39,6 +34,7 @@ public class RaceController {
     }
 
     private void createCars(String[] carNames) {
+        this.cars = new ArrayList<>();
         for (String carName : carNames) {
             cars.add(new Car(carName));
         }
@@ -48,6 +44,20 @@ public class RaceController {
         for (Car car : cars) {
             car.moveForwardOrNot(random);
         }
+    }
+
+    private List<Car> findWinners(List<Car> cars) {
+        int maxPosition = 0;
+        List<Car> winners = new ArrayList<>();
+        for (Car car : cars) {
+            maxPosition = Math.max(maxPosition, car.getPosition());
+        }
+        for (Car car : cars) {
+            if (car.getPosition() == maxPosition) {
+                winners.add(car);
+            }
+        }
+        return winners;
     }
 
 }
