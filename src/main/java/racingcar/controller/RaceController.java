@@ -14,15 +14,14 @@ public class RaceController {
 
     public void operate() {
         InputView inputView = new InputView();
+        createCars(inputView.getCarNames());
         setAttemptCount(inputView.getAttemptCount());
 
-        createCars(inputView.getCarNames());
-        OutputView.printResulttMessage();
+        OutputView.printResultMessage();
         Random random = new Random();
         for (int i = 0; i < attemptCount; i++) {
             moveCars(random);
             OutputView.printCars(cars);
-            System.out.println();
         }
 
         List<Car> winners = findWinners(cars);
