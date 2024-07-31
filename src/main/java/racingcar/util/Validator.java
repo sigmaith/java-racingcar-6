@@ -4,7 +4,7 @@ import static java.util.Arrays.stream;
 
 public class Validator {
     private static final String DELIMITER = ",";
-    private static final String POSITIVE_INTEGER_REGEX = "^[1-9]\\\\d*$";
+    private static final String POSITIVE_INTEGER_REGEX = "^[1-9]\\d*$";
 
     public static String[] validateCarNames(String carNames) {
         String[] carNameArray = carNames.split(DELIMITER);
