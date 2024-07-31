@@ -1,7 +1,9 @@
 package racingcar.controller;
 
 import racingcar.model.Car;
+import racingcar.model.Random;
 import racingcar.view.InputView;
+import racingcar.view.OutputView;
 
 import java.util.List;
 
@@ -16,8 +18,15 @@ public class RaceController {
         setAttemptCount(inputView.getAttemptCount());
 
         createCars(inputView.getCarNames());
-
-
+        OutputView.printResulttMessage();
+        Random random = new Random();
+        for (int i = 0; i < attemptCount; i++) {
+            moveCars(random);
+            OutputView.printCars(cars);
+            System.out.println();
+        }
+//        List<Car> winners = Car.findWinners(cars);
+//        OutputView.printEndMessage(winners);
 
     }
 
@@ -32,6 +41,12 @@ public class RaceController {
     private void createCars(String[] carNames) {
         for (String carName : carNames) {
             cars.add(new Car(carName));
+        }
+    }
+
+    private void moveCars(Random random) {
+        for (Car car : cars) {
+            car.moveForwardOrNot(random);
         }
     }
 
